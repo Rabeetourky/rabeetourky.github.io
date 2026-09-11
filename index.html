@@ -10,19 +10,25 @@
 <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #ffffff;
-    --ink: #000000;
-    --ink-2: #4a4a4a;
-    --claret: #6e1b2b;
-    --rule: rgba(0, 0, 0, 0.25);
+    --paper: #f4f6fb;
+    --ink: #0f1a33;
+    --ink-2: #4b5670;
+    --navy: #1f3b73;
+    --link: #1f3b73;
+    --claret: #8a1c33;
+    --band-text: #ffffff;
+    --band-muted: rgba(255, 255, 255, 0.8);
+    --rule: rgba(31, 59, 115, 0.25);
     --measure: 38rem;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --paper: #141414;
-      --ink: #ececec;
-      --ink-2: #b0b0b0;
-      --claret: #d98c9a;
+      --paper: #0f1320;
+      --ink: #e6e9f2;
+      --ink-2: #a6adc2;
+      --navy: #1f3b73;
+      --link: #9ab8f2;
+      --claret: #e39aab;
       --rule: rgba(255, 255, 255, 0.25);
     }
   }
@@ -44,30 +50,32 @@
   main {
     max-width: var(--measure);
     margin: 0 auto;
-    padding: 2.25rem 1.25rem 4rem;
+    padding: 1.5rem 1.25rem 4rem;
   }
 
   p { margin: 0 0 1rem; text-wrap: pretty; hyphens: auto; }
   i, em { font-style: italic; }
 
   a {
-    color: inherit;
+    color: var(--link);
     text-decoration: underline;
-    text-decoration-color: var(--claret);
+    text-decoration-color: color-mix(in srgb, var(--link) 45%, transparent);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
   }
-  a:hover { color: var(--claret); }
+  a:hover { text-decoration-color: currentColor; }
   a:focus-visible { outline: 2px solid var(--claret); outline-offset: 2px; }
 
-  /* Masthead */
-  .masthead {
+  /* Masthead: full-width navy band */
+  .masthead { background: var(--navy); color: var(--band-text); }
+  .masthead .inner {
+    max-width: var(--measure);
+    margin: 0 auto;
+    padding: 2.25rem 1.25rem 2rem;
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 1.25rem;
     align-items: start;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--rule);
   }
   h1 {
     font-size: 2.4rem;
@@ -76,12 +84,13 @@
     letter-spacing: -0.01em;
     margin: 0 0 0.6rem;
   }
-  .role { color: var(--ink-2); margin: 0; line-height: 1.4; }
+  .role { color: var(--band-muted); margin: 0; line-height: 1.4; }
   .portrait {
     width: 7rem;
     height: 7rem;
     object-fit: cover;
     display: block;
+    border: 3px solid rgba(255, 255, 255, 0.55);
   }
   @media (max-width: 40em) {
     .portrait { width: 5.25rem; height: 5.25rem; }
@@ -92,9 +101,11 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.25rem 1.5rem;
-    margin: 0.9rem 0 2rem;
+    margin: 0 0 2rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--rule);
   }
-  nav a { text-decoration: none; }
+  nav a { text-decoration: none; color: var(--link); }
   nav a:hover { text-decoration: underline; }
 
   h2 {
@@ -103,6 +114,14 @@
     font-style: italic;
     color: var(--claret);
     margin: 2.5rem 0 0.75rem;
+  }
+  h2::after {
+    content: "";
+    display: block;
+    width: 2.25rem;
+    height: 2px;
+    background: var(--claret);
+    margin-top: 0.35rem;
   }
   h2:first-of-type { margin-top: 2rem; }
 
@@ -115,7 +134,8 @@
     margin: 0 0 0.7rem;
   }
   .y {
-    color: var(--ink-2);
+    color: var(--claret);
+    font-weight: 500;
     font-variant-numeric: lining-nums tabular-nums;
     font-feature-settings: "lnum", "tnum";
   }
@@ -131,19 +151,22 @@
 </style>
 </head>
 <body>
-<main>
 
 <header class="masthead">
-  <div>
-    <h1>Rabee Tourky</h1>
-    <p class="role">
-      Trevor Swan Distinguished Professor of Economics<br>
-      Australian National University
-    </p>
+  <div class="inner">
+    <div>
+      <h1>Rabee Tourky</h1>
+      <p class="role">
+        Trevor Swan Distinguished Professor of Economics<br>
+        Australian National University
+      </p>
+    </div>
+    <img class="portrait" alt="Rabee Tourky" width="140" height="140"
+         src="unnamed.png">
   </div>
-  <img class="portrait" alt="Rabee Tourky" width="140" height="140"
-       src="unnamed.png">
 </header>
+
+<main>
 
 <nav aria-label="Sections">
   <a href="#present-work">Present work</a>
@@ -303,8 +326,6 @@ it is restricted to the university.</p>
   <a href="https://rse.anu.edu.au/people/rabee-tourky">ANU profile</a>
   <a href="https://researchportalplus.anu.edu.au/en/persons/rabee-tourky/">ANU research portal</a>
   <a href="https://arxiv.org/search/?searchtype=author&amp;query=Tourky%2C+R">arXiv</a>
-  <a href="https://www.scopus.com/authid/detail.uri?authorId=6602673588">Scopus</a>
-  <a href="https://tourky.org">Blog</a>
 </p>
 
 <footer>Updated September 2026.</footer>
